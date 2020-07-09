@@ -1,9 +1,8 @@
 ---
-title: "在R Markdown文档中使用中文"
+title: "homework1"
 author:
-  - 谢益辉
-  - 邱怡轩
-  - 于淼
+  - 3170102187
+  - 孙晨旭
 documentclass: ctexart
 output:
   rticles::ctex:
