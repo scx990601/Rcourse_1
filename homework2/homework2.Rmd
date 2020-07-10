@@ -1,0 +1,151 @@
+---
+title: "homework2"
+author:
+  - "3170102187"
+  - 孙晨旭
+documentclass: ctexart
+output:
+  rticles::ctex:
+#    fig_caption: yes
+    number_sections: yes
+#    toc: yes
+classoption: "hyperref,"
+---
+```{r setup, include=FALSE}
+library(tidyverse)
+library(DAAG)
+```
+
+
+
+# Loading and cleaning
+a.
+```
+ca_pa <- read_csv("~/github/Rcourse_1/data/calif_penn_2011.csv")
+```
+```{r,message=FALSE,include=FALSE}
+ca_pa <- read_csv("~/github/Rcourse_1/data/calif_penn_2011.csv")
+```
+b.rows and columns
+```{r ,message=F}
+dim(ca_pa)
+```
+c.
+```{r}
+tail(colSums(apply(ca_pa,c(1,2),is.na)))
+```
+apply函数将is.na()作用于ca_pa的每一个元素，colSums()统计每一列中为na类型的元素个数。
+
+d.e.
+```{r}
+ca_pa_1<-na.omit(ca_pa)
+(delete_nrows = nrow(ca_pa)-nrow(ca_pa_1))
+```
+
+f.
+```{r}
+sum(apply(ca_pa,c(1,2),is.na))
+sum(rowSums(apply(ca_pa,c(1,2),is.na))!=F)
+```
+c中统计为每一列中na的数量，累加后为na元素的数量。由于每一行可以包含多个na，所以，最终统计至少包含一个na的行数为670,所以(c),(e)相符。
+
+# This Very New House
+\par\noindent a.
+```{r}
+ca_pa_1 %>% ggplot(aes(x = Median_house_value,y = Built_2005_or_later,
+                       col = Built_2005_or_later)) +
+  geom_col(position = "dodge") + 
+  theme(legend.position = "none")
+```
+
+b.
+```{r}
+ca_pa_1 %>% ggplot(aes(x = Median_house_value,y = Built_2005_or_later,
+                       col = Built_2005_or_later))+
+  geom_col(position = "dodge") +
+  facet_wrap(~STATEFP,scales = "free")+
+  theme(legend.position = "none")
+```
+
+
+# Nobody Home
+a.
+```{r}
+ca_pa_2 <- ca_pa_1 %>% mutate(Vacancy_rate = Vacant_units/Total_units)
+summary(ca_pa_2$Vacancy_rate)
+```
+b.
+```{r}
+ca_pa_2 %>% ggplot(aes(x = Median_house_value,y = Vacancy_rate
+                       ,col = Vacancy_rate)) +
+  geom_col() + 
+  theme(legend.position = "none")
+```
+
+c.
+```{r}
+ca_pa_2 %>% ggplot(aes(x = Median_house_value,y = Vacancy_rate,
+                       col = Vacancy_rate)) + 
+  geom_col() + 
+  theme(legend.position = "none") + 
+  facet_wrap(~STATEFP,scales = "free")
+```
+可以看出，加州各个价位的房子都有空闲，而宾州的空房子主要集中在较低价位。此外，结合房屋建造的时间，说明可能宾州新建的房屋空闲概率较大。
+
+
+
+# COUNTYFP
+a.
+前一个循环用于找出ca_pa中为于加州Alameda County的数据下标，后一个循环根据以上下标提取出相应Median_house_value这一列的数据,最后求中位数。
+b.
+```{r}
+median((ca_pa_1 %>% filter(STATEFP == "06",COUNTYFP=="001"))$Median_house_value)
+```
+
+# MB.Ch 1.11.
+```{r}
+gender <- factor(c(rep("female", 91), rep("male", 92)))
+table(gender)
+```
+```{r}
+gender <- factor(gender, levels=c("male", "female"))
+table(gender)
+```
+```{r}
+gender <- factor(gender, levels=c("Male", "female"))
+# Note the mistake: "Male" should be "male"
+table(gender)
+```
+```{r}
+table(gender, exclude=NULL)
+```
+```{r}
+rm(gender)
+```
+首先建立一个factor类型的数据gender，其中前91个为"female"后92个为"male"。之后重新设置levels,若能在gender内找到，就正常返回，若有设定外的levels则将其返回为NA。  默认下table不显示NA的值，有关NA的输出由参数useNA控制。最后一个操作中exclude=NULL参数表示不排除任何数据，但却将useNA默认为"ifany"，若NA个数为正，此时就会输出一个<NA>levels。
+
+
+
+# MB.Ch 1.12.
+```{r}
+exceed <- function(x,cutoff){
+  sum(x>cutoff)/length(x)
+}
+exceed(1:100,60)
+exceed(1:100,0)
+exceed(1:100,19.5)
+```
+
+
+# MB.Ch.1.18.
+
+```{r,include=FALSE}
+library(MASS)
+```
+
+```{r}
+cbind(Treatment = unstack(Rabbit, Treatment ~ Animal)[,1],
+      Dose = unstack(Rabbit, Dose ~ Animal)[,1],
+      unstack(Rabbit, BPchange ~ Animal))
+```
+
