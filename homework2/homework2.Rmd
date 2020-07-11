@@ -76,8 +76,8 @@ summary(ca_pa_2$Vacancy_rate)
 ```
 b.
 ```{r}
-ca_pa_2 %>% ggplot(aes(x = Median_house_value,y = Vacancy_rate
-                       ,col = Vacancy_rate)) +
+ca_pa_2 %>% ggplot(aes(x = Median_house_value,y = Vacancy_rate,
+                       col = Vacancy_rate)) +
   geom_col() + 
   theme(legend.position = "none")
 ```
@@ -101,6 +101,46 @@ b.
 ```{r}
 median((ca_pa_1 %>% filter(STATEFP == "06",COUNTYFP=="001"))$Median_house_value)
 ```
+c.
+```{r}
+mean((ca_pa_1 %>% filter(STATEFP == "06",COUNTYFP=="001"))$Built_2005_or_later )
+mean((ca_pa_1 %>% filter(STATEFP == "06",COUNTYFP=="085"))$Built_2005_or_later )
+mean((ca_pa_1 %>% filter(STATEFP == "42",COUNTYFP=="003"))$Built_2005_or_later )
+```
+d.
+```{r}
+#(i)
+cor(ca_pa_1$Median_house_value,ca_pa_1$Built_2005_or_later) 
+#(ii)
+ca_pa_Cali <- ca_pa_1 %>% filter(STATEFP=="06")
+cor(ca_pa_Cali$Median_house_value,ca_pa_Cali$Built_2005_or_later) 
+#(iii)
+ca_pa_Penn <- ca_pa_1 %>% filter(STATEFP=="42")
+cor(ca_pa_Cali$Median_house_value,ca_pa_Cali$Built_2005_or_later) 
+#(iv)
+ca_pa_Alam <- ca_pa_Cali %>% filter(COUNTYFP == "001")
+cor(ca_pa_Alam$Median_house_value,ca_pa_Alam$Built_2005_or_later) 
+#(v)
+ca_pa_Sant <- ca_pa_Cali %>% filter(COUNTYFP == "085")
+cor(ca_pa_Sant$Median_house_value,ca_pa_Sant$Built_2005_or_later)
+#(vi)
+ca_pa_Alle <- ca_pa_Penn %>% filter(COUNTYFP == "003")
+cor(ca_pa_Alle$Median_house_value,ca_pa_Alle$Built_2005_or_later)
+```
+e.
+```{r,message=FALSE}
+temp<-full_join(ca_pa_Alam,ca_pa_Sant)
+ca_pa_3county <- ca_pa_3county<-full_join(temp,ca_pa_Alle)
+```
+```{r}
+ca_pa_3county %>% ggplot(aes(x = Median_house_value,y = Median_household_income,
+                             col = Median_household_income)) + 
+  geom_point(size = 0.1) + 
+  theme(legend.position = "none") +
+  facet_wrap(~COUNTYFP,scales = "free")
+```
+
+
 
 # MB.Ch 1.11.
 ```{r}

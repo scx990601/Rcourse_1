@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.7.8)  10 JUL 2020 16:32
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.7.8)  11 JUL 2020 09:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -899,24 +899,33 @@ Overfull \hbox (21.07573pt too wide) in paragraph at lines 292--294
 [][]
  []
 
-[5] [6] [7] [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 443.
-[9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 443.
+[5] [6] [7]
+File: homework2_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pd
+f)
+<use homework2_files/figure-latex/unnamed-chunk-15-1.pdf>
+
+Overfull \hbox (21.07573pt too wide) in paragraph at lines 452--453
+[][] 
+ []
+
+[8] [9] [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 581.
+[11]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 581.
 (./homework2.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 443.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 443.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 581.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 581.
 Package rerunfilecheck Info: File `homework2.out' has not changed.
 (rerunfilecheck)             Checksum: BAF2D95E4BE6B4B473D2F49DB528EA75;360.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 443.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 581.
  ) 
 Here is how much of TeX's memory you used:
- 21093 strings out of 481269
- 418489 string characters out of 5923164
- 667347 words of memory out of 5000000
- 38292 multiletter control sequences out of 15000+600000
+ 21099 strings out of 481269
+ 418794 string characters out of 5923164
+ 667349 words of memory out of 5000000
+ 38297 multiletter control sequences out of 15000+600000
  545246 words of font info for 77 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 57i,6n,118p,369b,875s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,6n,118p,369b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on homework2.pdf (9 pages).
+Output written on homework2.pdf (11 pages).
