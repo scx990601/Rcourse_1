@@ -107,7 +107,7 @@ attach(Manitoba.lakes)
 plot(log2(area) ~ elevation, pch=16, xlim=c(170,280))
 text(log2(area) ~ elevation, labels=row.names(Manitoba.lakes), pos=4)
 text(log2(area) ~ elevation, labels=area, pos=2)
-title("Lakes in Manitoba with logarithmical area-scale")
+title(main = "Manitoba’s Largest Lakes",sub = "Lakes in Manitoba with logarithmical area-scale")
 ```
 
 
@@ -116,7 +116,7 @@ title("Lakes in Manitoba with logarithmical area-scale")
 plot(area ~ elevation, pch=16, xlim=c(170,280), ylog=T)
 text(area ~ elevation, labels=row.names(Manitoba.lakes), pos=4, ylog=T)
 text(area ~ elevation, labels=area, pos=2, ylog=T)
-title("Lakes in Manitoba with logarithmical elevation-scale")
+title(main = "Manitoba’s Largest Lakes",sub = "Lakes in Manitoba with logarithmical elevation-scale")
 ```
 
 # MB.Ch 1.7. Manitoba.lakes data frame
@@ -124,13 +124,13 @@ title("Lakes in Manitoba with logarithmical elevation-scale")
 ```{r}
 dotchart(log2(area),labels =  row.names(Manitoba.lakes),xlim = c(9,14.7))
 text(1:9~log2(area), labels=area, pos=3)
-title("Area of Each Lake in Manitoba with Logarithmic scale")
+title(main = "Manitoba’s Largest Lakes",sub = "Area of Each Lake in Manitoba with Logarithmic scale")
 ```
 
 ```{r}
 dotchart(area,labels =  row.names(Manitoba.lakes),xlim = c(0,25300))
 text(1:9~area, labels=area, pos=3)
-title("Area of Each Lake in Manitoba with linear scale")
+title(main = "Manitoba’s Largest Lakes",sub = "Area of Each Lake in Manitoba with linear scale")
 ```
 # MB.Ch 1.8. Manitoba.lakes data frame
 ```{r}

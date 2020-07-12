@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.7.8)  11 JUL 2020 13:48
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.7.8)  12 JUL 2020 14:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**homework1.tex
-(./homework1.tex
+**homework3.tex
+(./homework3.tex
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-06-18> (c:/Users/lenovo/AppData/Roaming/TinyTeX/texm
 f-dist/tex/latex/ctex/ctexart.cls
@@ -704,8 +704,8 @@ other characters in Unicode lower plane
 (c:/Users/lenovo/AppData/Roaming/TinyTeX/texmf-dist/tex/xelatex/xecjk/xunicode-
 extra.def
 File: xunicode-extra.def 2020/06/06 v3.8.4 extra definition for xunicode
-) (./homework1.aux)
-\openout1 = `homework1.aux'.
+) (./homework3.aux)
+\openout1 = `homework3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
 LaTeX Font Info:    ... okay on input line 114.
@@ -756,9 +756,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 114.
 LaTeX Info: Redefining \pageref on input line 114.
 LaTeX Info: Redefining \nameref on input line 114.
-(./homework1.out) (./homework1.out)
+(./homework3.out) (./homework3.out)
 \@outlinefile=\write4
-\openout4 = `homework1.out'.
+\openout4 = `homework3.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
 16.
@@ -828,196 +828,44 @@ e=dflt;mapping=tex-text;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/FangSong(0)/m/n' will be
-(Font)              scaled to size 10.2909pt on input line 121.
+(Font)              scaled to size 10.2909pt on input line 118.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.53937> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 122.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 119.
+File: homework3_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf
+)
+<use homework3_files/figure-latex/unnamed-chunk-2-1.pdf>
 
-Overfull \hbox (92.12033pt too wide) in paragraph at lines 140--140
-[]\TU/lmtt/m/n/10.53937 ##  [1] "Year"  "Rain0" "Temp1" "Rain1" "Temp2" "Rain2"
- "Temp3" "Rain3" "Temp4"[] 
- []
-
-
-Overfull \hbox (3.5897pt too wide) in paragraph at lines 161--161
-[]\TU/lmtt/m/n/10.53937 ##   Year Rain0 Temp1 Rain1 Temp2 Rain2 Temp3 Rain3 Tem
-p4 Yield[] 
- []
-
-
-Overfull \hbox (3.5897pt too wide) in paragraph at lines 161--161
-[]\TU/lmtt/m/n/10.53937 ## 2 1931 14.76  57.5  3.83    75  2.72  77.2   3.3  72
-.6  32.9[] 
+Overfull \hbox (21.07573pt too wide) in paragraph at lines 143--145
+[][]
  []
 
 [1
 
 ] [2]
-Overfull \hbox (108.71991pt too wide) in paragraph at lines 283--283
-[]\TU/lmtt/m/n/10.53937 ##  [1]    1  373  745 1117 1489 1861 2233 2605 2977 33
-49 3721 4093 4465 4837 5209[] 
- []
-
-
-Overfull \hbox (25.72235pt too wide) in paragraph at lines 283--283
-[]\TU/lmtt/m/n/10.53937 ## [16] 5581 5953 6325 6697 7069 7441 7813 8185 8557 89
-29 9301 9673[] 
- []
-
-
-Overfull \hbox (58.92137pt too wide) in paragraph at lines 301--301
-[]\TU/lmtt/m/n/10.53937 ##  [1]     1.0000   205.0612   409.1224   613.1837   8
-17.2449  1021.3061[] 
- []
-
-
-Overfull \hbox (58.9213pt too wide) in paragraph at lines 301--301
-[]\TU/lmtt/m/n/10.53937 ##  [7]  1225.3673  1429.4286  1633.4898  1837.5510  20
-41.6122  2245.6735[] 
- []
-
-
-Overfull \hbox (58.9213pt too wide) in paragraph at lines 301--301
-[]\TU/lmtt/m/n/10.53937 ## [13]  2449.7347  2653.7959  2857.8571  3061.9184  32
-65.9796  3470.0408[] 
- []
-
-
-Overfull \hbox (58.9213pt too wide) in paragraph at lines 301--301
-[]\TU/lmtt/m/n/10.53937 ## [19]  3674.1020  3878.1633  4082.2245  4286.2857  44
-90.3469  4694.4082[] 
- []
-
-
-Overfull \hbox (58.9213pt too wide) in paragraph at lines 301--301
-[]\TU/lmtt/m/n/10.53937 ## [25]  4898.4694  5102.5306  5306.5918  5510.6531  57
-14.7143  5918.7755[] 
- []
-
-
-Overfull \hbox (58.9213pt too wide) in paragraph at lines 301--301
-[]\TU/lmtt/m/n/10.53937 ## [31]  6122.8367  6326.8980  6530.9592  6735.0204  69
-39.0816  7143.1429[] 
- []
-
-
-Overfull \hbox (58.9213pt too wide) in paragraph at lines 301--301
-[]\TU/lmtt/m/n/10.53937 ## [37]  7347.2041  7551.2653  7755.3265  7959.3878  81
-63.4490  8367.5102[] 
- []
-
-
-Overfull \hbox (58.9213pt too wide) in paragraph at lines 301--301
-[]\TU/lmtt/m/n/10.53937 ## [43]  8571.5714  8775.6327  8979.6939  9183.7551  93
-87.8163  9591.8776[] 
- []
-
-[3]
-File: homework1_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf
-)
-<use homework1_files/figure-latex/unnamed-chunk-8-1.pdf>
-
-Overfull \hbox (21.07573pt too wide) in paragraph at lines 337--338
-[][] 
- []
-
-[4]
-File: homework1_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type pdf
-)
-<use homework1_files/figure-latex/unnamed-chunk-9-1.pdf>
-
-Overfull \hbox (21.07573pt too wide) in paragraph at lines 347--348
-[][] 
- []
-
-
-Overfull \hbox (42.32187pt too wide) in paragraph at lines 373--373
-[]\TU/lmtt/m/n/10.53937 ##  $ rcc   : num  3.96 4.41 4.14 4.11 4.45 4.1 4.31 4.
-42 4.3 4.51 ...[] 
- []
-
-
-Overfull \hbox (53.38821pt too wide) in paragraph at lines 373--373
-[]\TU/lmtt/m/n/10.53937 ##  $ hc    : num  37.5 38.2 36.4 37.3 41.5 37.4 39.6 3
-9.9 41.1 41.6 ...[] 
- []
-
-
-Overfull \hbox (42.32187pt too wide) in paragraph at lines 373--373
-[]\TU/lmtt/m/n/10.53937 ##  $ hg    : num  12.3 12.7 11.6 12.6 14 12.5 12.8 13.
-2 13.5 12.7 ...[] 
- []
-
-[5]
-Overfull \hbox (53.38821pt too wide) in paragraph at lines 373--373
-[]\TU/lmtt/m/n/10.53937 ##  $ wt    : num  78.9 74.4 69.1 74.9 64.6 63.7 75.2 6
-2.3 66.5 62.9 ...[] 
- []
-
-
-Overfull \hbox (14.65607pt too wide) in paragraph at lines 373--373
-[]\TU/lmtt/m/n/10.53937 ##  $ sex   : Factor w/ 2 levels "f","m": 1 1 1 1 1 1 1
- 1 1 1 ...[] 
- []
-
-
-Overfull \hbox (86.58725pt too wide) in paragraph at lines 373--373
-[]\TU/lmtt/m/n/10.53937 ##  $ sport : Factor w/ 10 levels "B_Ball","Field",..: 
-1 1 1 1 1 1 1 1 1 1 ...[] 
- []
-
-File: homework1_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pd
-f)
-<use homework1_files/figure-latex/unnamed-chunk-12-1.pdf>
-
-Overfull \hbox (21.07573pt too wide) in paragraph at lines 418--419
-[][] 
- []
-
-[6]
-File: homework1_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pd
-f)
-<use homework1_files/figure-latex/unnamed-chunk-13-1.pdf>
-
-Overfull \hbox (21.07573pt too wide) in paragraph at lines 435--436
-[][] 
- []
-
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.53937> on input line 220.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 220.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 220.
+[3] [4] [5] [6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 432.
 [7]
-File: homework1_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pd
-f)
-<use homework1_files/figure-latex/unnamed-chunk-14-1.pdf>
-
-Overfull \hbox (21.07573pt too wide) in paragraph at lines 449--450
-[][] 
- []
-
-[8]
-File: homework1_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pd
-f)
-<use homework1_files/figure-latex/unnamed-chunk-15-1.pdf>
-
-Overfull \hbox (21.07573pt too wide) in paragraph at lines 459--461
-[][]
- []
-
-[9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 472.
-[10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 472.
-(./homework1.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 472.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 472.
-Package rerunfilecheck Info: File `homework1.out' has not changed.
-(rerunfilecheck)             Checksum: 27E3594790348EA0CA7BB03E734ACC62;483.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 472.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 432.
+(./homework3.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 432.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 432.
+Package rerunfilecheck Info: File `homework3.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 432.
  ) 
 Here is how much of TeX's memory you used:
- 21136 strings out of 481269
- 421272 string characters out of 5923164
- 666436 words of memory out of 5000000
- 38333 multiletter control sequences out of 15000+600000
- 545246 words of font info for 77 fonts, out of 8000000 for 9000
+ 21121 strings out of 481269
+ 419746 string characters out of 5923164
+ 667098 words of memory out of 5000000
+ 38316 multiletter control sequences out of 15000+600000
+ 557261 words of font info for 90 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 57i,6n,119p,369b,875s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,6n,119p,369b,836s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on homework1.pdf (10 pages).
+Output written on homework3.pdf (7 pages).

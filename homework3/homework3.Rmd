@@ -1,0 +1,137 @@
+---
+title: "homework3"
+author:
+  - "3170102187"
+  - 孙晨旭
+documentclass: ctexart
+output:
+  rticles::ctex:
+#    fig_caption: yes
+    number_sections: yes
+#    toc: yes
+classoption: "hyperref,"
+---
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+
+```{r,message = FALSE}
+gmp <- read.table("~/github/Rcourse_1/data/gmp.dat")
+gmp$pop <- round(gmp$gmp/gmp$pcgmp)
+gmp <- gmp %>% mutate(lmfit_1 = 6611*pop^0.125,
+                      lmfit_2 = 6611*pop^0.1,
+                      lmfit_3 = 6611*pop^0.15)
+```
+\noindent 1. 
+```{r}
+gmp %>% ggplot(aes(x = pop,y = pcgmp))+
+  geom_point()+
+  geom_line(aes(x = pop,y = lmfit_1),
+            col = 'blue',size = 1.5)+
+  geom_line(aes(x = pop,y = lmfit_2),
+            col = 'red',size = 1.5)+
+  geom_line(aes(x = pop,y = lmfit_3),
+            col = 'green',size = 1.5)+
+  scale_x_log10()
+  
+```
+\noindent 2.
+```{r}
+mse <- function(parameter,POP = gmp$pop,PCGMP = gmp$pcgmp){
+  re<-mean((PCGMP - parameter[1]*POP^parameter[2])^2)
+  return(re)
+}
+```
+```{r}
+mse(c(6611,0.15))
+mse(c(5000,0.10))
+```
+\noindent 4.
+```{r,warning=FALSE}
+head(nlm(mse,c(6611,0.15)),2)
+head(nlm(mse,c(6611,0.125)),2)
+head(nlm(mse,c(6611,0.1)),2)
+```
+minimun 和 estimate分别返回函数的最小值与最小值点（估计），即minimum = mse(estimate)。对上述三点，大都返回$y_0 \approx 6611, a \approx 0.12631$，对较远的初值，往往返回不同的结果，如
+```{r,warning=FALSE}
+head(nlm(mse,c(6600,0.15)),2)
+head(nlm(mse,c(6611,1)),2)
+```
+\noindent 5.
+```{r}
+plm <- function(init,N = gmp$pop,Y = gmp$pcgmp){
+  temp <- nlm(mse,init,POP = N,PCGMP = Y)
+  re_list <-list(temp$estimate,temp$minimum)
+  return(re_list)
+}
+```
+
+```{r,warning=FALSE}
+plm(c(6611,0.15))
+plm(c(5000,0.10))
+```
+两个迭代结果有显著不同，其中前者函数值更小。根据nlm函数描述，采用了Newton-type算法，因此猜测结果不同的原因是迭代终止于迭代初值附近的某个局部极小值点。
+
+\noindent 6.
+\noindent a.
+```{r}
+mean(gmp$pcgmp)
+(se <- sd(gmp$pcgmp)/sqrt(nrow(gmp)))
+```
+\noindent b.
+```{r}
+jackknife.omit <- function(i,data = gmp$pcgmp){
+  return(mean(data[-i]))
+  }
+```
+
+\noindent c.
+```{r}
+jackknife.mean <- function(data = gmp$pcgmp){
+  re <- vector(length = length(data))
+  for(i in 1:length(data)){
+    re[i] <- jackknife.omit(i)
+  }
+  return(re)
+}
+```
+
+\noindent d.
+```{r}
+jackknift.var <- var(jackknife.mean())*365^2/366
+(jackknife.se <- sqrt(jackknift.var))
+all.equal(se,jackknife.se)
+```
+\noindent 7.
+```{r}
+plm.jackknife <-function(init,POP = gmp$pop,PCGMP = gmp$pcgmp){
+  # ncoefs = 2
+  n <- length(POP)
+  J <- matrix(0,nrow = n, ncol = 2)
+  for(i in 1:n){
+    new.coef <- plm(init,N = POP[-i],Y = PCGMP[-i])[[1]]
+    J[i,] <- new.coef
+  }
+  J.var <- apply(J,2,var)
+  J.se <- sqrt(((n-1)^2/n)*J.var)
+  return(J.se)
+}
+```
+```{r,warning= FALSE}
+plm.jackknife(c(6611,0.125))
+plm.jackknife(c(5000,0.125))
+```
+应用plm处理去除一行的数据时，总是回归到相同的值，也就是说每次去除的元素对plm没什么影响。因此，我的理解是，对不同抽样得到的参数都一样，方差和标准误差都为0。
+
+
+\noindent 8.
+```{r,warning=FALSE}
+gmp_2013 <- read.table("~/github/Rcourse_1/data/gmp-2013.dat")
+gmp_2013$pop <- round(gmp_2013$gmp/gmp_2013$pcgmp)
+plm(c(6611,0.1),N = gmp_2013$pop,Y = gmp_2013$pcgmp)
+plm.jackknife(c(6611,0.125),POP = gmp_2013$pop,PCGMP = gmp_2013$pcgmp)
+```
+对比2006的数据，2013有明显的不同。
+
+
