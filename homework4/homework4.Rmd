@@ -1,0 +1,79 @@
+---
+title: "homework4"
+author:
+  - "3170102187"
+  - 孙晨旭
+documentclass: ctexart
+output:
+  rticles::ctex:
+#    fig_caption: yes
+    number_sections: yes
+#    toc: yes
+classoption: "hyperref,"
+---
+```{r setup, include=FALSE}
+library(tidyverse)
+library(dplyr)
+```
+
+```{r,message=FALSE}
+ckm_nodes <- read_csv("~/github/Rcourse_1/data/ckm_nodes.csv")
+ckm_network <-read.table("~/github/Rcourse_1/data/ckm_network.dat")
+```
+
+\noindent 1.
+```{r}
+omit <- which(is.na(ckm_nodes$adoption_date))
+ckm_nodes <- ckm_nodes[-omit,]
+ckm_network <- ckm_network[-omit,-omit]
+```
+\noindent 2.
+```{r}
+#------------------------
+temp <- function(x){return(x==1:17)}
+temp2<-function(Fun,V,data = ckm_nodes$adoption_date){
+  col1<-apply(array(data),1,Fun)
+  col1<-data.frame(col1)
+  col1<-col1 %>% gather()
+  col1 <- cbind(1:17,col1)
+  colnames(col1)<-c('date','doctor',V)
+  return(col1)
+}
+#------------------------col1
+ckm<-temp2(temp,'begin_prescribing')
+#------------------------col2
+temp <- function(x){return(x<=1:17)}
+ckm<-full_join(ckm,temp2(temp,'adopted_before'),by = c('date','doctor'))# not strictly before
+#------------------------col3
+temp3 <- function(x){
+  if(is.na(x)){
+    return(vector(length = 17))
+  }else{
+    return(x<1:17)
+  }
+}
+temp4<-function(x){
+  re<-apply(array(ckm_nodes$adoption_date[as.logical(ckm_network[x,])]),1,temp3)
+  if(length(re)!=0){
+    return(rowSums(re))
+  }else{
+    return(as.numeric(vector(length=17)))
+  }
+}
+ckm<-full_join(ckm,temp2(temp4,'ncontact_strict_before',1:125),by = c('date','doctor'))
+#------------------------col4
+temp3 <- function(x){
+  if(is.na(x)){
+    return(vector(length = 17))
+  }else{
+    return(x<=1:17)
+  }
+}
+ckm<-full_join(ckm,temp2(temp4,'ncontact_in_or_earlier',1:125),by = c('date','doctor'))
+#------------------------
+head(ckm)
+```
+如向量data.frame ckm所示，四列数据和两列标签一共组成六列数据，而125为医生和17个月使得数据共有125*17 = 2125行。
+
+
+
