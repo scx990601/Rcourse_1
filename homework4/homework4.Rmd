@@ -75,5 +75,60 @@ head(ckm)
 ```
 如向量data.frame ckm所示，四列数据和两列标签一共组成六列数据，而125为医生和17个月使得数据共有125*17 = 2125行。
 
+\noindent 3.a.
+```{r}
+max(rowSums(ckm_network))
+```
+因为每个医生的社交圈内至多有20人，所以k=0~20，至多有21种取法。
+
+\noindent b.
+```{r}
+T<- ckm %>% group_by(ncontact_strict_before) %>% mutate(pk = sum(adopted_before))
+T<-table(T$pk,T$ncontact_strict_before)
+pk <- data.frame(vector(length = ncol(T)))
+pk[,1]<- as.numeric(colnames(T))
+pk[1,2]<-1 
+colnames(pk) <- c('ncontact','pk')
+for(i in 1:ncol(T)){
+  pk[i,2] <- as.numeric(names(T[,i][(T[,i] != 0)]))/T[,i][(T[,i] != 0)]
+}
+plot(pk$pk~pk$ncontact)
+```
 
 
+\noindent c.
+```{r}
+T<- ckm %>% group_by(ncontact_in_or_earlier) %>% mutate(qk = sum(adopted_before))
+T<-table(T$qk,T$ncontact_in_or_earlier)
+qk <- data.frame(vector(length = ncol(T)))
+qk[,1]<- as.numeric(colnames(T))
+qk[1,2]<-1 
+colnames(qk) <- c('ncontact','qk')
+for(i in 1:ncol(T)){
+  qk[i,2] <- as.numeric(names(T[,i][(T[,i] != 0)]))/T[,i][(T[,i] != 0)]
+}
+plot(qk$qk~qk$ncontact)
+```
+
+
+
+\noindent 4.
+```{r}
+k = 0:19 
+L <- lm(pk$pk~pk$ncontact)
+y1 <- coef(L)[1] + coef(L)[2]*k
+ggplot()+
+  geom_point(aes(x = pk$ncontact,y = pk$pk))+
+  geom_line(aes(x = k,y = y1))
+```
+
+```{r}
+Lo <- glm(pk$pk~pk$ncontact,family = binomial())
+y2 <- exp(coef(Lo)[1] + coef(Lo)[2]*k)/(1+exp(coef(Lo)[1] + coef(Lo)[2]*k))
+ggplot()+
+  geom_point(aes(x = pk$ncontact,y = pk$pk))+
+  geom_line(aes(x = k,y = y2,col = "green"),size = 1)+
+  geom_line(aes(x = k,y = y1,col = "blue"))+
+  theme(legend.position = "none")
+```
+从图像上看，第二种模型明显更合适。而且，当使用线性模型预测k>18的情况时，得到结果明显超过1，但该结果表示的实际意义是某个概率，大于1就是不合理的。
