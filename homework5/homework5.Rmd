@@ -1,0 +1,81 @@
+---
+title: "homework5"
+author:
+  - "3170102187"
+  - 孙晨旭
+documentclass: ctexart
+output:
+  rticles::ctex:
+#    fig_caption: yes
+    number_sections: yes
+#    toc: yes
+classoption: "hyperref,"
+
+---
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+```{r,message=FALSE,include=FALSE}
+wtid <- read_csv("~/github/Rcourse_1/data/wtid-report.csv")
+```
+
+\noindent 1.
+```{r}
+percentile_ratio_discrepancies <- function(a,P99,P99.5,P99.9){
+  re <- (((P99/P99.9)^(-a+1)-10)^2 +
+           ((P99.5/P99.9)^(-a+1)-5)^2+
+           ((P99/P99.5)^(-a+1)-2)^2)
+  return(re)
+}
+```
+```{r}
+percentile_ratio_discrepancies(a = 2,P99 = 1e6,P99.5 = 2e6,P99.9 = 1e7)
+```
+\noindent 2.
+```{r}
+exponent.multi_ratios_est <- function(A){
+#  A = c(P99,P99.5,P99.9)
+  init = 1-log(10)/log(A[1]/A[3])
+  T<-nlm(percentile_ratio_discrepancies,init,A[1],A[2],A[3])
+  return(T$estimate)
+}
+```
+
+```{r}
+exponent.multi_ratios_est(c(1e6,2e6,1e7))
+```
+\noindent 3.
+```{r}
+wtid_1 <- wtid %>% select(`P99 income threshold`,
+                          `P99.5 income threshold`,
+                          `P99.9 income threshold`)
+a_est <- function(data = wtid_1){
+  re<-apply(data,1,exponent.multi_ratios_est)
+  return(re)
+}
+```
+```{r}
+wtid <- cbind(wtid,a = a_est())
+```
+```{r}
+wtid %>% ggplot(aes(x = Year, y = a))+
+  geom_line()+
+  geom_point()
+```
+
+\noindent 4.
+
+```{r}
+wtid <- wtid %>% mutate(model_a = 
+                          1-log(10)/log(`P99 income threshold`/`P99.9 income threshold`))
+summary(wtid$a-wtid$model_a)
+```
+```{r}
+wtid %>% ggplot(aes(x = Year, y = a))+
+  geom_line()+
+  geom_point()+
+  geom_point(aes(x = Year,y = model_a),col = 'red')
+```
+\noindent 从这些数据来看，两个估计比较接近，说明$a = 1-\frac{\log(10)}{\log(P99/P99.9)}$是第一问中优化问题的一个比较好的估计。
+
