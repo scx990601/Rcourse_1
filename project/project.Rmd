@@ -1,0 +1,79 @@
+---
+title: "关于NBA球员正负值的讨论"
+author:
+  - "3170102187"
+  - 孙晨旭
+documentclass: ctexart
+output:
+  rticles::ctex:
+#    fig_caption: yes
+#    number_sections: yes
+#    toc: yes
+classoption: "hyperref,"
+
+---
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+# 简介
+RPM,即NBA球员的正负值，表示该球员在场上时球队净胜分的情况，是衡量球员综合表现得一个指标。本次作业选取17年NBA所有球员的数据，分析RPM与球员出场时间以及球员薪酬的关系。首先读入数据：
+```{r,warning=FALSE,message=FALSE}
+nba <- read_csv("~/github/Rcourse_1/project/nba_2017_nba_players_with_salary.csv")
+#extract from 
+#https://www.kaggle.com/dhamlett/nba-player-rpm-prediction-defense-vs-offense
+nba<- nba %>% select(-1)
+head(nba)
+```
+
+其次检查数据完整情况，其中na类型只出现在两项命中率数据上，说明所有数据都完整，只是某些球员整个赛季没有三分和罚球，因此对应命中率为na。
+```{r}
+rowSums(apply(nba,1,is.na))
+```
+
+
+# RPM与出场时间
+
+```{r,warning = FALSE}
+temp1 <- min(nba$WINS_RPM)
+nba<-nba %>% mutate(RPM1 = WINS_RPM-temp1)
+temp2 <-max(nba$RPM1)
+nba$RPM1 <-nba$RPM1/temp2
+L1<- glm(RPM1~MP,family = binomial(),data = nba)
+summary(L1)
+L2<- lm(WINS_RPM~MP,data = nba)
+summary(L2)
+k <- 0:40
+Y <- exp(coef(L1)[1] + coef(L1)[2]*k)/(1+exp(coef(L1)[1] + coef(L1)[2]*k))
+Y<- Y*temp2 + temp1
+Y2<- coef(L2)[1] + coef(L2)[2]*k
+ggplot()+
+  geom_point(aes(x = nba$MP,y = nba$WINS_RPM,col = nba$POSITION),size = 2) + 
+  geom_line(aes(x = k,y = Y),col = "red")+
+  geom_line(aes(x = k,y = Y2),col = "blue")+
+  theme(legend.position = c(0.08,0.78),legend.title = element_blank())+
+  labs(x = "MP",y = 'WINS_RPM')
+```
+从结果来看，出场时间与RPM有着明显的正相关关系，这也与实际情况相符，球队往往希望表现更好的球员多打一会。另外，还可以发现，在拥有较高RPM的球员中，SG位置似乎很少，说明可能现在球队更喜欢将PG或SF作为球队核心。下面的图也将说明这一关系(因为PF-C分类太少，就将其去除)。
+```{r}
+table(nba$POSITION)
+nba %>% filter(POSITION != 'PF-C') %>% ggplot(aes(x = POSITION,y = WINS_RPM))+
+  geom_boxplot()+labs(x = "POSITION",y = 'WINS_RPM')
+```
+
+# RPM与薪酬
+```{r}
+L3<- lm(WINS_RPM~SALARY_MILLIONS,data = nba)
+summary(L3)
+k<-0:32
+Y <- coef(L3)[1] + coef(L3)[2]*k
+ggplot()+
+  geom_point(aes(x = nba$SALARY_MILLIONS,y = nba$WINS_RPM,col = nba$POSITION))+
+  geom_line(aes(x = k,y = Y))+
+  theme(legend.title = element_blank())+
+  labs(x = "SALARY_MILLIONS",y = 'WINS_RPM')
+```
+可见RPM与薪酬基本上也保持正相关，但是不如出场时间拟合的那么好。结合实际情况，有些低薪球员为了在将来获得高薪合同奋力表现自己，而有些球员拿到高额报酬后就开始“放松养生”，表现糟糕。尽管实际情况可能更加复杂，但是从17年的数据来看，确实有许多球员在RPM这一项指标上表现的与他的薪水不符。
+
+
+
